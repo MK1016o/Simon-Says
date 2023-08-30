@@ -1,15 +1,15 @@
-let h3 = document.querySelector("h3");
-let boxes = document.querySelectorAll(".box");
-let level = 0;
-let gameSeq = [];
-let userSeq = [];
-let seq = ["red", "yellow", "purple", "blue"];
-let started = false;
-let highScore = 0;
-let p = document.querySelector("p");
-let hoverAudio = document.createElement('audio');
+const h3 = document.querySelector("h3");
+const boxes = document.querySelectorAll(".box");
+const level = 0;
+const gameSeq = [];
+const userSeq = [];
+const seq = ["red", "yellow", "purple", "blue"];
+const started = false;
+const highScore = 0;
+const p = document.querySelector("p");
+const hoverAudio = document.createElement('audio');
 hoverAudio.setAttribute('src', 'hover.mp3');
-let gameOverAudio = document.createElement('audio');
+const gameOverAudio = document.createElement('audio');
 gameOverAudio.setAttribute('src', 'game-over.wav');
 
 
@@ -33,7 +33,7 @@ function check(idx) {
 
 for (box of boxes) {
   box.addEventListener("click", function (ev) {
-    let btn = this;
+    const btn = this;
     userFlash(btn);
     userSeq.push(btn.getAttribute("id"));
     check(userSeq.length - 1);
@@ -64,7 +64,7 @@ function levelUp() {
   h3.innerText = `Level ${level}`;
   let randomIdx = Math.floor(Math.random() * 3);
   gameSeq.push(seq[randomIdx]);
-  let randBtn = document.querySelector(`.${seq[randomIdx]}`);
+  const randBtn = document.querySelector(`.${seq[randomIdx]}`);
   flash(randBtn);
 }
 
