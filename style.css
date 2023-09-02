@@ -26,6 +26,14 @@ p {
 h3 {
   margin: 1rem;
 }
+button {
+  padding: 1rem;
+  background-color: #000;
+  color: #fff;
+  font-size: 1.3rem;
+  border: none;
+  border-radius: 15px;
+}
 .container {
   display: flex;
   justify-content: center;
@@ -39,6 +47,9 @@ h3 {
   margin: 2rem;
   border: 3px solid black;
   border-radius: 20%;
+}
+.disable {
+  pointer-events: none;
 }
 .red {
   background-color: rgb(211, 17, 17);

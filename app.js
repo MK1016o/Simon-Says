@@ -1,16 +1,16 @@
 const h3 = document.querySelector("h3");
 const boxes = document.querySelectorAll(".box");
-const level = 0;
-const gameSeq = [];
-const userSeq = [];
+let level = 0;
+let gameSeq = [];
+let userSeq = [];
 const seq = ["red", "yellow", "purple", "blue"];
-const started = false;
-const highScore = 0;
+let started = false;
+let highScore = 0;
 const p = document.querySelector("p");
 const hoverAudio = document.createElement('audio');
-hoverAudio.setAttribute('src', 'hover.mp3');
+hoverAudio.setAttribute('src', '../Sound/hover.mp3');
 const gameOverAudio = document.createElement('audio');
-gameOverAudio.setAttribute('src', 'game-over.wav');
+gameOverAudio.setAttribute('src', '../Sound/game-over.wav');
 
 
 function check(idx) {
@@ -19,15 +19,18 @@ function check(idx) {
       setTimeout(levelUp, 1000);
     }
   } else {
-    gameSeq = [];
     setTimeout(() => {
-      h3.innerHTML = `Game Over <br> Your Score is ${level} <br> Press any Key to Continue`;
+      h3.innerHTML = `Game Over <br> Your Score is ${level} <br>`;
       level = 0;
-    }, 250);
+    }, 100);
     highScore = Math.max(highScore, level);
     p.innerText = `HIGH SCORE : ${highScore}`;
     gameOverAudio.play();
     started = false;
+    for(box of boxes) {
+      box.classList.add('disable');
+    }
+
   }
 }
 
@@ -40,7 +43,6 @@ for (box of boxes) {
   });
   box.addEventListener("mouseover",function () {
     hoverAudio.play();
-    console.log("hover");
   })
 }
 
@@ -48,14 +50,14 @@ function userFlash(btn) {
   btn.classList.add("userFlash");
   setTimeout(() => {
     btn.classList.remove("userFlash");
-  }, 250);
+  }, 150);
 }
 
 function flash(btn) {
   btn.classList.add("flash");
   setTimeout(() => {
     btn.classList.remove("flash");
-  }, 250);
+  }, 150);
 }
 
 function levelUp() {
@@ -68,8 +70,13 @@ function levelUp() {
   flash(randBtn);
 }
 
-document.addEventListener("keypress", () => {
+const btn = document.querySelector('button');
+btn.addEventListener("click", () => {
   if (started == false) {
+    gameSeq = [];
+    for(box of boxes) {
+      box.classList.remove('disable');
+    }
     levelUp();
     started = true;
   }
